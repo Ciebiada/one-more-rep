@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.top-bar {
+  margin-bottom: 3rem;
+}
+
+.clear-input {
+  width: 100%;
+  padding: unset;
+  font: unset;
+  background: unset;
+  color: unset;
+  border: unset;
+  outline: unset;
+}

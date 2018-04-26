@@ -1,0 +1,27 @@
+{
+  "name": "one-more-rep",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bulma": "^0.7.1",
+    "classnames": "^2.2.5",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-pouchdb": "^4.0.0",
+    "moment": "^2.22.1",
+    "pouchdb": "^6.4.3",
+    "pouchdb-authentication": "^1.1.2",
+    "pouchdb-upsert": "^2.2.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
