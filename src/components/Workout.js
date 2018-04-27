@@ -39,6 +39,24 @@ class Workout extends Component {
     })
   }
 
+  cloneWorkout = () => {
+    const { history } = this.props
+    const { workout } = this.state
+
+    const now = new Date().toJSON()
+
+    console.log(workout)
+
+    store().put({
+      ...workout,
+      _rev: null,
+      _id: now,
+      date: now
+    }).then(created => {
+      history.push(`/workout/${created.id}`)
+    })
+  }
+
   onNameChange = (evt) => {
     const id = this.state.workout._id
     const name = evt.target.value
@@ -76,17 +94,39 @@ class Workout extends Component {
       />
     )
 
+    const meta = (
+      <div className='field is-grouped'>
+        <p className='control'>
+          <a
+            className='button is-small'
+            onClick={this.cloneWorkout}
+          >
+            Clone
+          </a>
+        </p>
+        <p className='control'>
+          <a
+            className='button is-text is-small'
+            onClick={this.deleteWorkout}
+          >
+            Delete
+          </a>
+        </p>
+      </div>
+    )
+
     return (
       <div>
         <Hero
           title={title}
           subtitle={subtitle}
+          meta={meta}
         />
         <section className='section'>
           <div className='container'>
             <div className='top-bar'>
               <div className='buttons is-centered'>
-                <span className='button is-rounded is-outlined is-danger' onClick={this.deleteWorkout}>Delete Workout</span>
+                <a className='button is-primary is-rounded' onClick={this.addWorkout}>Add Exercise</a>
               </div>
             </div>
           </div>

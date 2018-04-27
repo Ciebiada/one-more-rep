@@ -17,3 +17,15 @@ body {
   border: unset;
   outline: unset;
 }
+
+/* hack to fix inconsitent height of input datetime-local */
+.hero.is-primary .title {
+  height: 36px;
+}
+.hero.is-primary .subtitle{
+  height: 25px;
+}
+
+::placeholder {
+  opacity: 0.5;
+}

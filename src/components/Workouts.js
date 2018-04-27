@@ -30,10 +30,11 @@ class Workouts extends Component {
   }
 
   addWorkout = () => {
+    const now = new Date().toJSON()
     store().put({
-      _id: new Date().toISOString(),
+      _id: now,
       name: 'Unnamed',
-      date: new Date().toISOString()
+      date: now
     })
   }
 
@@ -54,7 +55,7 @@ class Workouts extends Component {
           <div className='container'>
             <div className='top-bar'>
               <div className='buttons is-centered'>
-                <span className='button is-primary is-rounded' onClick={this.addWorkout}>Add Workout</span>
+                <a className='button is-primary is-rounded' onClick={this.addWorkout}>Add Workout</a>
               </div>
             </div>
             <WorkoutsList workouts={workouts} />

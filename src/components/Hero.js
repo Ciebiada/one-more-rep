@@ -11,7 +11,7 @@ class Hero extends Component {
   toggleMenu = () => this.setState({ menuOpened: !this.state.menuOpened })
 
   render() {
-    const { title, subtitle, menu } = this.props
+    const { title, subtitle, meta, menu } = this.props
     const { menuOpened } = this.state
 
     return (
@@ -47,6 +47,7 @@ class Hero extends Component {
             <h2 className='subtitle'>
               {subtitle}
             </h2>
+            {meta}
           </div>
         </div>
       </section>
@@ -57,6 +58,7 @@ class Hero extends Component {
 Hero.propTypes = {
   title: node,
   subtitle: node,
+  meta: node,
   menu: node
 }
 
