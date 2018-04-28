@@ -6539,6 +6539,10 @@ raf@3.4.0:
   dependencies:
     performance-now "^2.1.0"
 
+ramda@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
+
 random-uuid-v4@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/random-uuid-v4/-/random-uuid-v4-0.0.6.tgz#dc5edb7926adf471b55d79cbfc983af5b4979b03"

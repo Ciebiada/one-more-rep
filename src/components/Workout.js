@@ -1,9 +1,19 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import { filter, map, addIndex } from 'ramda'
 
 import { store } from '../db'
 
 import Hero from './Hero'
+import ExercisesList from './ExercisesList';
+
+const updateInList = (list, id, update) =>
+  addIndex(map)(
+    (element, idx) => element._id === id
+      ? { ...element, ...update(element, idx === list.length - 1) }
+      : element,
+    list
+  )
 
 class Workout extends Component {
   state = {
@@ -42,31 +52,83 @@ class Workout extends Component {
   cloneWorkout = () => {
     const { history } = this.props
     const { workout } = this.state
-
     const now = new Date().toJSON()
 
-    console.log(workout)
-
-    store().put({
-      ...workout,
-      _rev: null,
-      _id: now,
-      date: now
-    }).then(created => {
-      history.push(`/workout/${created.id}`)
-    })
+    store()
+      .put({
+        ...workout,
+        _rev: null,
+        _id: now,
+        date: now
+      })
+      .then(created => history.push('/'))
   }
 
-  onNameChange = (evt) => {
+  addExercise = () => {
+    const { _id, exercises = []} = this.state.workout
+    const exercise = { 
+      _id: new Date().toJSON(),
+      name: ''
+    }
+
+    store()
+      .upsert(_id, doc => ({ ...doc, exercises: [...exercises, exercise] }))
+      .then(() => this.addWorkSet(exercise._id)())
+  }
+
+  deleteExercise = id => () => {
+    const { _id, exercises } = this.state.workout
+
+    store().upsert(_id, doc => ({ ...doc, exercises: filter(({ _id }) => _id !== id, exercises) }))
+  }
+
+  updateExercise = id => (props) => {
+    const { _id, exercises } = this.state.workout
+
+    store().upsert(_id, doc => ({
+      ...doc,
+      exercises: map(exercise => exercise._id === id ? { ...exercise, ...props } : exercise, exercises)
+    }))
+  }
+
+  onNameChange = evt => {
     const id = this.state.workout._id
     const name = evt.target.value
+
     store().upsert(id, doc => ({ ...doc, name }))
   }
 
-  onDateChange = (evt) => {
+  onDateChange = evt => {
     const id = this.state.workout._id
     const date = moment(evt.target.value).toDate()
+
     store().upsert(id, doc => ({ ...doc, date }))
+  }
+
+  addWorkSet = exerciseId => () => {
+    const { _id} = this.state.workout
+    const workSet = {
+      _id: new Date().toJSON()
+    }
+
+    store().upsert(_id, doc => ({
+      ...doc,
+      exercises: map(exercise => exercise._id === exerciseId ? { ...exercise, workSets: [...(exercise.workSets || []), workSet] } : exercise, doc.exercises)
+    }))
+  }
+
+  updateWorkSet = exerciseId => workSetId => (props) => {
+    const { _id} = this.state.workout
+
+    store().upsert(_id, doc => ({
+      ...doc,
+      exercises: updateInList(doc.exercises, exerciseId, exercise => ({
+        workSets: updateInList(exercise.workSets, workSetId, (_, last) => {
+          if (last) this.addWorkSet(exerciseId)()
+          return props
+        })
+      }))
+    }))
   }
 
   render () {
@@ -126,9 +188,15 @@ class Workout extends Component {
           <div className='container'>
             <div className='top-bar'>
               <div className='buttons is-centered'>
-                <a className='button is-primary is-rounded' onClick={this.addWorkout}>Add Exercise</a>
+                <a className='button is-primary is-rounded' onClick={this.addExercise}>Add Exercise</a>
               </div>
             </div>
+            <ExercisesList
+              exercises={workout.exercises}
+              onExerciseDelete={this.deleteExercise}
+              onExerciseUpdate={this.updateExercise}
+              updateWorkSet={this.updateWorkSet}
+            />
           </div>
         </section>
       </div>

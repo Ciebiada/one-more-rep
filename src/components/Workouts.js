@@ -33,7 +33,7 @@ class Workouts extends Component {
     const now = new Date().toJSON()
     store().put({
       _id: now,
-      name: 'Unnamed',
+      name: '',
       date: now
     })
   }
