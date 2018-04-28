@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { arrayOf, object, func } from 'prop-types'
-import moment from 'moment'
 
 import './ExercisesList.css'
 

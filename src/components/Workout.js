@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { filter, map, addIndex } from 'ramda'
+import { reject, map, addIndex } from 'ramda'
 
 import { store } from '../db'
 
@@ -79,7 +79,7 @@ class Workout extends Component {
   deleteExercise = id => () => {
     const { _id, exercises } = this.state.workout
 
-    store().upsert(_id, doc => ({ ...doc, exercises: filter(({ _id }) => _id !== id, exercises) }))
+    store().upsert(_id, doc => ({ ...doc, exercises: reject(({ _id }) => _id === id, exercises) }))
   }
 
   updateExercise = id => (props) => {
@@ -117,14 +117,28 @@ class Workout extends Component {
     }))
   }
 
+  deleteWorkSet = exerciseId => workSetId => {
+    const { _id} = this.state.workout
+
+    store().upsert(_id, doc => ({
+      ...doc,
+      exercises: updateInList(doc.exercises, exerciseId, exercise => ({
+        workSets: reject(({_id}) => _id === workSetId, exercise.workSets)
+      }))
+    }))
+  }
+
   updateWorkSet = exerciseId => workSetId => (props) => {
     const { _id} = this.state.workout
 
     store().upsert(_id, doc => ({
       ...doc,
       exercises: updateInList(doc.exercises, exerciseId, exercise => ({
-        workSets: updateInList(exercise.workSets, workSetId, (_, last) => {
+        workSets: updateInList(exercise.workSets, workSetId, (workSet, last) => {
           if (last) this.addWorkSet(exerciseId)()
+          const merged = {...workSet, ...props}
+          if (!merged.reps && !merged.weight) this.deleteWorkSet(exerciseId)(workSetId)
+
           return props
         })
       }))
