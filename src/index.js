@@ -13,6 +13,7 @@ import SignIn from './components/SignIn'
 ReactDOM.render(
   <BrowserRouter>
     <div>
+      <Route exact path='/index.html' component={Workouts} />
       <Route exact path='/' component={Workouts} />
       <Route path='/workout/:id' component={Workout} />
       <Route path='/sign-in' component={SignIn} />
