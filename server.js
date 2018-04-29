@@ -10,9 +10,10 @@ const corsOptions = {
   credentials: true
 }
 
+app.use('/', express.static('build'))
 app.use('/', cors(corsOptions), pouchHandler) 
 
-app.listen(5984)
+app.listen(process.env.PORT || 5984)
 
 const users = new PouchDB('_users')
 
