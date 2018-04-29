@@ -5,9 +5,7 @@
   "dependencies": {
     "bulma": "^0.7.1",
     "classnames": "^2.2.5",
-    "cors": "^2.8.4",
     "express": "^4.16.3",
-    "express-pouchdb": "^4.0.0",
     "moment": "^2.22.1",
     "pouchdb": "^6.4.3",
     "pouchdb-authentication": "^1.1.2",
@@ -24,6 +22,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "postinstall": "REACT_APP_DB_HOST=https://tylko-klata.herokuapp.com:5984 npm run build"
+    "postinstall": "npm run build"
   }
 }
