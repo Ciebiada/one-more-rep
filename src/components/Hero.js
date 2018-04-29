@@ -11,7 +11,7 @@ class Hero extends Component {
   toggleMenu = () => this.setState({ menuOpened: !this.state.menuOpened })
 
   render() {
-    const { title, subtitle, meta, menu } = this.props
+    const { title, subtitle, meta } = this.props
     const { menuOpened } = this.state
 
     return (
@@ -21,19 +21,15 @@ class Hero extends Component {
             <div className='container'>
               <div className='navbar-brand'>
                 <Link className='navbar-item' to='/'>One More Rep</Link>
-                {menu
-                  ? (
-                    <span className='navbar-burger burger' onClick={this.toggleMenu}>
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </span>
-                  )
-                  : null}
+                <span className='navbar-burger burger' onClick={this.toggleMenu}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
               </div>
               <div className={classNames('navbar-menu', { 'is-active': menuOpened })}>
                 <div className='navbar-end'>
-                  {menu}
+                  <Link className='navbar-item' to='/sign-in'>Sign in</Link>
                 </div>
               </div>
             </div>
@@ -58,8 +54,7 @@ class Hero extends Component {
 Hero.propTypes = {
   title: node,
   subtitle: node,
-  meta: node,
-  menu: node
+  meta: node
 }
 
 export default Hero

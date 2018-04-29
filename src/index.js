@@ -8,12 +8,14 @@ import './index.css'
 
 import Workouts from './components/Workouts'
 import Workout from './components/Workout'
+import SignIn from './components/SignIn'
 
 ReactDOM.render(
   <BrowserRouter>
     <div>
       <Route exact path='/' component={Workouts} />
       <Route path='/workout/:id' component={Workout} />
+      <Route path='/sign-in' component={SignIn} />
     </div>
   </BrowserRouter>,
   document.getElementById('root'))
