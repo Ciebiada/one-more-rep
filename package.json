@@ -23,6 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "REACT_APP_DB_HOST=https://tylko-klata.herokuapp.com:5984 npm run build"
   }
 }

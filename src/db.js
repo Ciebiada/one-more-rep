@@ -5,7 +5,9 @@ import PouchDB from 'pouchdb'
 PouchDB.plugin(PouchDBAuth)
 PouchDB.plugin(PouchDBUpsert)
 
-const remotedb = new PouchDB('http://localhost:5984/db')
+const dbHost = process.env.REACT_APP_DB_HOST
+
+const remotedb = new PouchDB(`${dbHost}/db`)
 const localdb = new PouchDB('local')
 
 export function signUp(login, password) {
@@ -16,7 +18,7 @@ export function signIn(login, password) {
   return remotedb
     .logIn(login, password)
     .then(() => {
-      localdb.sync(`http://localhost:5984/userdb-${login}`)
+      localdb.sync(`${dbHost}/userdb-${login}`)
     })
 }
 
