@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "auth0-js": "^9.5.1",
     "bulma": "^0.7.1",
     "classnames": "^2.2.5",
     "express": "^4.16.3",
     "moment": "^2.22.1",
     "pouchdb": "^6.4.3",
-    "pouchdb-authentication": "^1.1.2",
     "pouchdb-upsert": "^2.2.0",
     "prop-types": "^15.6.1",
     "ramda": "^0.25.0",
@@ -21,7 +21,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "postinstall": "npm run build"
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.1.0"
   }
 }

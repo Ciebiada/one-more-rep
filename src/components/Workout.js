@@ -5,7 +5,7 @@ import { reject, map, addIndex } from 'ramda'
 import { store } from '../db'
 
 import Hero from './Hero'
-import ExercisesList from './ExercisesList';
+import ExercisesList from './ExercisesList'
 
 const updateInList = (list, id, update) =>
   addIndex(map)(
@@ -20,7 +20,7 @@ class Workout extends Component {
     workout: null
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const workoutId = this.props.match.params.id
 
     this.getWorkout(workoutId)
@@ -32,7 +32,7 @@ class Workout extends Component {
     }).on('change', () => this.getWorkout(workoutId))
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.changes.cancel()
   }
 
@@ -65,8 +65,8 @@ class Workout extends Component {
   }
 
   addExercise = () => {
-    const { _id, exercises = []} = this.state.workout
-    const exercise = { 
+    const { _id, exercises = [] } = this.state.workout
+    const exercise = {
       _id: new Date().toJSON(),
       name: ''
     }

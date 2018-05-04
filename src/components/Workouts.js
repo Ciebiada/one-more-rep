@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 
 import { store } from '../db'
-  
+
 import Hero from './Hero'
-import WorkoutsList from './WorkoutsList';
+import WorkoutsList from './WorkoutsList'
 
 class Workouts extends Component {
   state = {
     workouts: []
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.getWorkouts()
 
     this.changes = store().changes({
@@ -19,7 +19,7 @@ class Workouts extends Component {
     }).on('change', this.getWorkouts)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.changes.cancel()
   }
 

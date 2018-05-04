@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { node } from 'prop-types'
 import classNames from 'classnames'
+import { node } from 'prop-types'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { isAuthenticated, login, logout } from '../auth'
 
 class Hero extends Component {
   state = {
@@ -10,7 +11,7 @@ class Hero extends Component {
 
   toggleMenu = () => this.setState({ menuOpened: !this.state.menuOpened })
 
-  render() {
+  render () {
     const { title, subtitle, meta } = this.props
     const { menuOpened } = this.state
 
@@ -29,7 +30,9 @@ class Hero extends Component {
               </div>
               <div className={classNames('navbar-menu', { 'is-active': menuOpened })}>
                 <div className='navbar-end'>
-                  <Link className='navbar-item' to='/sign-in'>Sign in</Link>
+                  {isAuthenticated()
+                    ? <Link to='/' className='navbar-item' onClick={logout}>Sign out</Link>
+                    : <a className='navbar-item' onClick={login}>Sign in</a>}
                 </div>
               </div>
             </div>

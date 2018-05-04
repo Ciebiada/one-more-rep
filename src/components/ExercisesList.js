@@ -37,7 +37,7 @@ const ExercisesList = ({ exercises, onExerciseDelete, onExerciseUpdate, updateWo
 )
 
 ExercisesList.propTypes = {
-  workouts: arrayOf(object),
+  exercises: arrayOf(object),
   onExerciseDelete: func.isRequired,
   onExerciseUpdate: func.isRequired,
   updateWorkSet: func.isRequired
