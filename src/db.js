@@ -3,11 +3,18 @@ import PouchDB from 'pouchdb'
 
 PouchDB.plugin(PouchDBUpsert)
 
-// const dbHost = process.env.REACT_APP_DB_HOST
-// const remotedb = new PouchDB(`${dbHost}/db`)
+const localDB = new PouchDB('local', { adapter: 'websql' })
 
-const localdb = new PouchDB('local', { adapter: 'websql' })
+sync()
 
 export function store () {
-  return localdb
+  return localDB
+}
+
+export function sync () {
+  const couchDB = localStorage.getItem('couchDB')
+  if (couchDB) {
+    const remoteDB = new PouchDB(couchDB)
+    localDB.sync(remoteDB)
+  }
 }

@@ -1,4 +1,5 @@
 import Auth0 from 'auth0-js'
+import { sync } from './db'
 
 const auth0 = new Auth0.WebAuth({
   domain: 'one-more-rep.auth0.com',
@@ -29,6 +30,7 @@ export function handleCallback ({ history, location }) {
     auth0.parseHash((_, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         setSession(authResult)
+        sync()
       }
 
       history.replace('/')
@@ -41,4 +43,5 @@ function setSession (authResult) {
   localStorage.setItem('access_token', authResult.accessToken)
   localStorage.setItem('id_token', authResult.idToken)
   localStorage.setItem('expires_at', expiresAt)
+  localStorage.setItem('couchDB', authResult.idTokenPayload['https://ciebiada.com/couchDB'])
 }
