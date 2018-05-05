@@ -4,7 +4,7 @@ import { sync } from './db'
 const auth0 = new Auth0.WebAuth({
   domain: 'one-more-rep.auth0.com',
   clientID: 'KP7MSlvT8TNjPygVA7AvUCkRFxgt3EUj',
-  redirectUri: 'http://localhost:3000/callback',
+  redirectUri: 'https://ciebiada.github.io/one-more-rep/callback',
   audience: 'https://one-more-rep.auth0.com/userinfo',
   responseType: 'token id_token',
   scope: 'openid'

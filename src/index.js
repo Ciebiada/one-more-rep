@@ -11,9 +11,8 @@ import Workouts from './components/Workouts'
 import Workout from './components/Workout'
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <div>
-      <Route exact path='/index.html' component={Workouts} />
       <Route exact path='/' component={Workouts} />
       <Route path='/workout/:id' component={Workout} />
       <Route
