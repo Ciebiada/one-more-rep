@@ -17,6 +17,10 @@ export function sync () {
   const couchDB = localStorage.getItem('couchDB')
   if (couchDB) {
     const remoteDB = new PouchDB(couchDB)
-    localDB.sync(remoteDB)
+    localDB.sync(remoteDB, { live: true, retry: true })
   }
+}
+
+window.importFromHeroku = (workouts) => {
+
 }

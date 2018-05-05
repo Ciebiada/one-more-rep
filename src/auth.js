@@ -18,6 +18,7 @@ export function logout () {
   localStorage.removeItem('access_token')
   localStorage.removeItem('id_token')
   localStorage.removeItem('expires_at')
+  localStorage.removeItem('couchDB')
 }
 
 export function isAuthenticated () {
