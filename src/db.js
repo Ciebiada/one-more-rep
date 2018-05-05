@@ -1,6 +1,7 @@
 import PouchDB from 'pouchdb'
 import PouchDBUpsert from 'pouchdb-upsert'
 import PouchDBFind from 'pouchdb-find'
+import { map, forEach, addIndex, sortBy, prop } from 'ramda'
 
 PouchDB.plugin(PouchDBUpsert)
 PouchDB.plugin(PouchDBFind)
@@ -22,5 +23,24 @@ export function sync () {
 }
 
 window.importFromHeroku = (workouts) => {
+  addIndex(forEach)((workout, idx) => {
+    if (!workout.when) return
 
+    const w = {
+      _id: new Date().toJSON() + idx,
+      name: workout.name,
+      date: workout.when,
+      exercises: addIndex(map)((exercise, idx) => ({
+        _id: new Date().toJSON() + idx,
+        name: exercise.name,
+        workSets: addIndex(map)((workSet, idx) => ({
+          _id: new Date().toJSON() + idx,
+          weight: workSet.weight,
+          reps: workSet.reps
+        }), exercise.work_sets)
+      }), sortBy(prop('updated_at'), workout.exercises))
+    }
+
+    localDB.put(w)
+  }, workouts)
 }

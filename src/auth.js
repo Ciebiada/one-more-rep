@@ -23,7 +23,8 @@ export function logout () {
 
 export function isAuthenticated () {
   const expiresAt = JSON.parse(localStorage.getItem('expires_at'))
-  return new Date().getTime() < expiresAt
+  const couchDB = localStorage.getItem('couchDB')
+  return couchDB && new Date().getTime() < expiresAt
 }
 
 export function handleCallback ({ history, location }) {

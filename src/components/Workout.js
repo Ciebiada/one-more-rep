@@ -106,7 +106,7 @@ class Workout extends Component {
   }
 
   addWorkSet = exerciseId => () => {
-    const { _id} = this.state.workout
+    const { _id } = this.state.workout
     const workSet = {
       _id: new Date().toJSON()
     }
@@ -118,7 +118,7 @@ class Workout extends Component {
   }
 
   deleteWorkSet = exerciseId => workSetId => {
-    const { _id} = this.state.workout
+    const { _id } = this.state.workout
 
     store().upsert(_id, doc => ({
       ...doc,
@@ -129,7 +129,7 @@ class Workout extends Component {
   }
 
   updateWorkSet = exerciseId => workSetId => (props) => {
-    const { _id} = this.state.workout
+    const { _id } = this.state.workout
 
     store().upsert(_id, doc => ({
       ...doc,
