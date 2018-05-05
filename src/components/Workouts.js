@@ -24,8 +24,13 @@ class Workouts extends Component {
   }
 
   getWorkouts = () => {
-    store().allDocs({ include_docs: true, descending: true }).then(doc => {
-      this.setState({ workouts: doc.rows.map(row => row.doc) })
+    store().createIndex({
+      index: { fields: ['date'] }
+    }).then(() => store().find({
+      selector: { date: { $gte: null } },
+      sort: [{ date: 'desc' }]
+    })).then(({ docs }) => {
+      this.setState({ workouts: docs })
     })
   }
 

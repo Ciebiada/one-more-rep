@@ -1,7 +1,9 @@
-import PouchDBUpsert from 'pouchdb-upsert'
 import PouchDB from 'pouchdb'
+import PouchDBUpsert from 'pouchdb-upsert'
+import PouchDBFind from 'pouchdb-find'
 
 PouchDB.plugin(PouchDBUpsert)
+PouchDB.plugin(PouchDBFind)
 
 const localDB = new PouchDB('local', { adapter: 'websql' })
 
