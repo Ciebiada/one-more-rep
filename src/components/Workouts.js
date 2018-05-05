@@ -36,10 +36,14 @@ class Workouts extends Component {
 
   addWorkout = () => {
     const now = new Date().toJSON()
+    const { history } = this.props
+
     store().put({
       _id: now,
       name: '',
       date: now
+    }).then(({id}) => {
+      history.push(`/workout/${id}`)
     })
   }
 
