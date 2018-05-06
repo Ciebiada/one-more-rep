@@ -174,7 +174,7 @@ class Workout extends Component {
       <div className='field is-grouped'>
         <p className='control'>
           <a
-            className='button is-small'
+            className='button is-inverted is-small'
             onClick={this.cloneWorkout}
           >
             Clone
@@ -182,7 +182,7 @@ class Workout extends Component {
         </p>
         <p className='control'>
           <a
-            className='button is-text is-small'
+            className='button is-inverted is-danger is-small'
             onClick={this.deleteWorkout}
           >
             Delete
