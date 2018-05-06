@@ -202,7 +202,7 @@ class Workout extends Component {
           <div className='container'>
             <div className='top-bar'>
               <div className='buttons is-centered'>
-                <a className='button is-primary is-rounded' onClick={this.addExercise}>Add Exercise</a>
+                <a className='button is-primary' onClick={this.addExercise}>Add Exercise</a>
               </div>
             </div>
             <ExercisesList

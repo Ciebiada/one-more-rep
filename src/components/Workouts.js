@@ -76,7 +76,7 @@ class Workouts extends Component {
           <div className='container'>
             <div className='top-bar'>
               <div className='buttons is-centered'>
-                <a className='button is-primary is-rounded' onClick={this.addWorkout}>Add Workout</a>
+                <a className='button is-primary' onClick={this.addWorkout}>Add Workout</a>
               </div>
             </div>
             <WorkoutsList workouts={workouts} />
