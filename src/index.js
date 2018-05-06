@@ -1,14 +1,12 @@
+import 'bulma/css/bulma.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
-import registerServiceWorker from './registerServiceWorker'
 import { handleCallback } from './auth'
-
-import 'bulma/css/bulma.css'
-import './index.css'
-
-import Workouts from './components/Workouts'
 import Workout from './components/Workout'
+import Workouts from './components/Workouts'
+import './index.css'
+import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>

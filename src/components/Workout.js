@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
 import moment from 'moment'
-import { reject, map, addIndex } from 'ramda'
-
+import { addIndex, map, reject } from 'ramda'
+import React, { Component } from 'react'
 import { store } from '../db'
-
-import Hero from './Hero'
 import ExercisesList from './ExercisesList'
+import Layout from './Layout'
 
 const updateInList = (list, id, update) =>
   addIndex(map)(
@@ -192,28 +190,25 @@ class Workout extends Component {
     )
 
     return (
-      <div>
-        <Hero
-          title={title}
-          subtitle={subtitle}
-          meta={meta}
-        />
-        <section className='section'>
-          <div className='container'>
-            <div className='top-bar'>
-              <div className='buttons is-centered'>
-                <a className='button is-primary' onClick={this.addExercise}>Add Exercise</a>
-              </div>
+      <Layout
+        title={title}
+        subtitle={subtitle}
+        meta={meta}
+      >
+        <div>
+          <div className='top-bar'>
+            <div className='buttons is-centered'>
+              <a className='button is-primary' onClick={this.addExercise}>Add Exercise</a>
             </div>
-            <ExercisesList
-              exercises={workout.exercises}
-              onExerciseDelete={this.deleteExercise}
-              onExerciseUpdate={this.updateExercise}
-              updateWorkSet={this.updateWorkSet}
-            />
           </div>
-        </section>
-      </div>
+          <ExercisesList
+            exercises={workout.exercises}
+            onExerciseDelete={this.deleteExercise}
+            onExerciseUpdate={this.updateExercise}
+            updateWorkSet={this.updateWorkSet}
+          />
+        </div>
+      </Layout>
     )
   }
 }

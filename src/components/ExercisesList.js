@@ -1,8 +1,6 @@
+import { arrayOf, func, object } from 'prop-types'
 import React from 'react'
-import { arrayOf, object, func } from 'prop-types'
-
 import './ExercisesList.css'
-
 import WorkSet from './WorkSet'
 
 const ExercisesList = ({ exercises, onExerciseDelete, onExerciseUpdate, updateWorkSet }) => (

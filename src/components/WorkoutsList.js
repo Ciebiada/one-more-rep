@@ -1,8 +1,7 @@
+import moment from 'moment'
+import { arrayOf, object } from 'prop-types'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { arrayOf, object } from 'prop-types'
-import moment from 'moment'
-
 import './WorkoutsList.css'
 
 const WorkoutsList = ({ workouts }) => (

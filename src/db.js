@@ -1,6 +1,6 @@
 import PouchDB from 'pouchdb'
-import PouchDBUpsert from 'pouchdb-upsert'
 import PouchDBFind from 'pouchdb-find'
+import PouchDBUpsert from 'pouchdb-upsert'
 
 PouchDB.plugin(PouchDBUpsert)
 PouchDB.plugin(PouchDBFind)
@@ -21,7 +21,7 @@ export function sync () {
   }
 }
 
-function createDB() {
+function createDB () {
   const iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)
 
   if (!iOS) return new PouchDB('local')

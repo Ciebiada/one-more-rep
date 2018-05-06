@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-
 import { store } from '../db'
-
-import Hero from './Hero'
+import Layout from './Layout'
 import WorkoutsList from './WorkoutsList'
+
+
 
 class Workouts extends Component {
   state = {
@@ -67,27 +67,24 @@ class Workouts extends Component {
     const { workouts, limit, totalRows } = this.state
 
     return (
-      <div>
-        <Hero
-          title='Workouts'
-          subtitle='Eat, sleep, train, repeat 🏋️'
-        />
-        <section className='section'>
-          <div className='container'>
-            <div className='top-bar'>
-              <div className='buttons is-centered'>
-                <a className='button is-primary' onClick={this.addWorkout}>Add Workout</a>
-              </div>
+      <Layout
+        title='Workouts'
+        subtitle='Eat, sleep, train, repeat 🏋️'
+      >
+        <div>
+          <div className='top-bar'>
+            <div className='buttons is-centered'>
+              <a className='button is-primary' onClick={this.addWorkout}>Add Workout</a>
             </div>
-            <WorkoutsList workouts={workouts} />
-            {limit < totalRows && (
-              <div className='buttons is-centered'>
-                <a className='button is-light is-small' onClick={this.loadMore}>Load more</a>
-              </div>
-            )}
           </div>
-        </section>
-      </div>
+          <WorkoutsList workouts={workouts} />
+          {limit < totalRows && (
+            <div className='buttons is-centered'>
+              <a className='button is-light is-small' onClick={this.loadMore}>Load more</a>
+            </div>
+          )}
+        </div>
+      </Layout>
     )
   }
 }

@@ -1,5 +1,5 @@
+import { func, object } from 'prop-types'
 import React from 'react'
-import { object, func } from 'prop-types'
 
 const controlledValue = value => value === null || value === undefined ? '' : value
 
