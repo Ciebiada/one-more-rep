@@ -15,16 +15,12 @@ export function login () {
 }
 
 export function logout () {
-  localStorage.removeItem('access_token')
-  localStorage.removeItem('id_token')
-  localStorage.removeItem('expires_at')
   localStorage.removeItem('couchDB')
 }
 
 export function isAuthenticated () {
-  const expiresAt = JSON.parse(localStorage.getItem('expires_at'))
   const couchDB = localStorage.getItem('couchDB')
-  return couchDB && new Date().getTime() < expiresAt
+  return couchDB !== null
 }
 
 export function handleCallback ({ history, location }) {
@@ -41,9 +37,5 @@ export function handleCallback ({ history, location }) {
 }
 
 function setSession (authResult) {
-  const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
-  localStorage.setItem('access_token', authResult.accessToken)
-  localStorage.setItem('id_token', authResult.idToken)
-  localStorage.setItem('expires_at', expiresAt)
   localStorage.setItem('couchDB', authResult.idTokenPayload['https://ciebiada.com/couchDB'])
 }
