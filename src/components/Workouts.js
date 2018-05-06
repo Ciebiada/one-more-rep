@@ -7,7 +7,9 @@ import WorkoutsList from './WorkoutsList'
 
 class Workouts extends Component {
   state = {
-    workouts: []
+    workouts: [],
+    limit: 10,
+    totalRows: 0
   }
 
   componentDidMount () {
@@ -24,13 +26,18 @@ class Workouts extends Component {
   }
 
   getWorkouts = () => {
+    const { limit } = this.state
+
+    store().allDocs().then(({ total_rows }) => this.setState({ totalRows: total_rows }))
+
     store().createIndex({
       index: { fields: ['date'] }
     }).then(() => store().find({
+      limit,
       selector: { date: { $gte: null } },
       sort: [{ date: 'desc' }]
-    })).then(({ docs }) => {
-      this.setState({ workouts: docs })
+    })).then(({ docs: workouts }) => {
+      this.setState({ workouts })
     })
   }
 
@@ -51,8 +58,13 @@ class Workouts extends Component {
     store().remove(workout)
   }
 
+  loadMore = () => {
+    const { limit } = this.state
+    this.setState({ limit: Math.round(limit * 3 / 2) }, this.getWorkouts)
+  }
+
   render () {
-    const { workouts } = this.state
+    const { workouts, limit, totalRows } = this.state
 
     return (
       <div>
@@ -68,6 +80,11 @@ class Workouts extends Component {
               </div>
             </div>
             <WorkoutsList workouts={workouts} />
+            {limit < totalRows && (
+              <div className='buttons is-centered'>
+                <a className='button is-light is-small' onClick={this.loadMore}>Load more</a>
+              </div>
+            )}
           </div>
         </section>
       </div>
