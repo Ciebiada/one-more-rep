@@ -1,12 +1,11 @@
 import PouchDB from 'pouchdb'
 import PouchDBUpsert from 'pouchdb-upsert'
 import PouchDBFind from 'pouchdb-find'
-import { map, forEach, addIndex, sortBy, prop } from 'ramda'
 
 PouchDB.plugin(PouchDBUpsert)
 PouchDB.plugin(PouchDBFind)
 
-const localDB = new PouchDB('local', { adapter: 'websql' })
+const localDB = createDB()
 
 sync()
 
@@ -22,25 +21,19 @@ export function sync () {
   }
 }
 
-window.importFromHeroku = (workouts) => {
-  addIndex(forEach)((workout, idx) => {
-    if (!workout.when) return
+function createDB() {
+  const iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)
 
-    const w = {
-      _id: new Date().toJSON() + idx,
-      name: workout.name,
-      date: workout.when,
-      exercises: addIndex(map)((exercise, idx) => ({
-        _id: new Date().toJSON() + idx,
-        name: exercise.name,
-        workSets: addIndex(map)((workSet, idx) => ({
-          _id: new Date().toJSON() + idx,
-          weight: workSet.weight,
-          reps: workSet.reps
-        }), exercise.work_sets)
-      }), sortBy(prop('updated_at'), workout.exercises))
-    }
+  if (!iOS) return new PouchDB('local')
 
-    localDB.put(w)
-  }, workouts)
+  let local
+  try {
+    // this is for ios
+    local = new PouchDB('local', { adapter: 'websql' })
+  } catch (err) {
+    // this is for private mode in safari
+    local = new PouchDB('local', { adapter: 'idb' })
+  }
+
+  return local
 }
