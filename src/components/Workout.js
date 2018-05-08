@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { object } from 'prop-types'
 import { addIndex, map, reject } from 'ramda'
 import React, { Component } from 'react'
 import { store } from '../db'
@@ -211,6 +212,11 @@ class Workout extends Component {
       </Layout>
     )
   }
+}
+
+Workout.propTypes = {
+  history: object.isRequired,
+  match: object.isRequired
 }
 
 export default Workout

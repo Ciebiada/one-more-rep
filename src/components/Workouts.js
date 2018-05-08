@@ -1,9 +1,8 @@
+import { object } from 'prop-types'
 import React, { Component } from 'react'
 import { store } from '../db'
 import Layout from './Layout'
 import WorkoutsList from './WorkoutsList'
-
-
 
 class Workouts extends Component {
   state = {
@@ -28,7 +27,7 @@ class Workouts extends Component {
   getWorkouts = () => {
     const { limit } = this.state
 
-    store().allDocs().then(({ total_rows }) => this.setState({ totalRows: total_rows }))
+    store().allDocs().then(({ total_rows: totalRows }) => this.setState({ totalRows }))
 
     store().createIndex({
       index: { fields: ['date'] }
@@ -42,8 +41,8 @@ class Workouts extends Component {
   }
 
   addWorkout = () => {
-    const now = new Date().toJSON()
     const { history } = this.props
+    const now = new Date().toJSON()
 
     store().put({
       _id: now,
@@ -87,6 +86,10 @@ class Workouts extends Component {
       </Layout>
     )
   }
+}
+
+Workouts.propTypes = {
+  history: object.isRequired
 }
 
 export default Workouts
