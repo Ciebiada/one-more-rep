@@ -1,29 +1,28 @@
 import { func, object } from 'prop-types'
 import React from 'react'
-
-const controlledValue = value => value === null || value === undefined ? '' : value
+import Input from './Input'
 
 const WorkSet = ({ workSet, onUpdate }) => (
   <div className='row'>
     <div className='columns is-mobile'>
       <div className='column'>
-        <input
+        <Input
           type='number'
           className='clear-input'
           placeholder='Weight'
-          value={controlledValue(workSet.weight)}
+          value={workSet.weight}
           step='0.125'
-          onChange={(evt) => onUpdate({ weight: evt.target.value })}
+          onChange={weight => onUpdate({ weight })}
         />
       </div>
       <div className='column'>
-        <input
+        <Input
           type='number'
           className='clear-input'
           placeholder='Reps'
-          value={controlledValue(workSet.reps)}
+          value={workSet.reps}
           step='0.125'
-          onChange={(evt) => onUpdate({ reps: evt.target.value })}
+          onChange={reps => onUpdate({ reps })}
         />
       </div>
     </div>
