@@ -4,6 +4,7 @@ import { addIndex, map, reject } from 'ramda'
 import React, { Component } from 'react'
 import { store } from '../db'
 import ExercisesList from './ExercisesList'
+import Input from './Input'
 import Layout from './Layout'
 
 const updateInList = (list, id, update) =>
@@ -90,16 +91,15 @@ class Workout extends Component {
     }))
   }
 
-  onNameChange = evt => {
+  onNameChange = name => {
     const id = this.state.workout._id
-    const name = evt.target.value
 
     store().upsert(id, doc => ({ ...doc, name }))
   }
 
-  onDateChange = evt => {
+  onDateChange = dateString => {
     const id = this.state.workout._id
-    const date = moment(evt.target.value).toDate()
+    const date = moment(dateString).toDate()
 
     store().upsert(id, doc => ({ ...doc, date }))
   }
@@ -150,7 +150,7 @@ class Workout extends Component {
     if (!workout) return null
 
     const title = (
-      <input
+      <Input
         autoFocus={!workout.name}
         className='clear-input'
         type='text'
@@ -161,7 +161,7 @@ class Workout extends Component {
     )
 
     const subtitle = (
-      <input
+      <Input
         className='clear-input'
         type='datetime-local'
         value={moment(workout.date).format('YYYY-MM-DDTHH:mm')}
