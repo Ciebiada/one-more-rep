@@ -9,7 +9,7 @@
     "classnames": "^2.2.5",
     "global": "^4.3.2",
     "moment": "^2.22.1",
-    "pouchdb": "^6.4.3",
+    "pouchdb": "6.4.1",
     "pouchdb-find": "^6.4.3",
     "pouchdb-upsert": "^2.2.0",
     "prop-types": "^15.6.1",
