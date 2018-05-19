@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { handleCallback } from './auth'
+import Stats from './components/Stats'
 import Workout from './components/Workout'
 import Workouts from './components/Workouts'
 import './index.css'
@@ -13,6 +14,7 @@ ReactDOM.render(
     <div>
       <Route exact path="/" component={Workouts} />
       <Route path="/workout/:id" component={Workout} />
+      <Route path="/stats" component={Stats} />
       <Route
         path="/callback"
         render={props => {
