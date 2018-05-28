@@ -1,60 +1,44 @@
 import { object } from 'prop-types'
 import React, { Component } from 'react'
-import { store } from '../db'
 import Layout from './Layout'
 import WorkoutsList from './WorkoutsList'
+import * as workouts from '../repositories/workouts'
 
 class Workouts extends Component {
   state = {
     workouts: [],
     limit: 10,
-    totalRows: 0
+    count: 0
   }
 
   componentDidMount () {
     this.getWorkouts()
 
-    this.changes = store().changes({
-      since: 'now',
-      live: true
-    }).on('change', this.getWorkouts)
+    this.watching = workouts.watch(this.getWorkouts)
   }
 
   componentWillUnmount () {
-    this.changes.cancel()
+    this.watching.cancel()
   }
 
   getWorkouts = () => {
     const { limit } = this.state
 
-    store().allDocs().then(({ total_rows: totalRows }) => this.setState({ totalRows }))
-
-    store().createIndex({
-      index: { fields: ['date'] }
-    }).then(() => store().find({
-      limit,
-      selector: { date: { $gte: null } },
-      sort: [{ date: 'desc' }]
-    })).then(({ docs: workouts }) => {
-      this.setState({ workouts })
+    workouts.findAll({limit}).then(({workouts, count}) => {
+      this.setState({workouts, count})
     })
   }
 
   addWorkout = () => {
     const { history } = this.props
-    const now = new Date().toJSON()
 
-    store().put({
-      _id: now,
-      name: '',
-      date: now
-    }).then(({id}) => {
+    workouts.create().then(({id}) => {
       history.push(`/workout/${id}`)
     })
   }
 
   deleteWorkout = (workout) => () => {
-    store().remove(workout)
+    workouts.remove(workout)
   }
 
   loadMore = () => {
@@ -63,7 +47,7 @@ class Workouts extends Component {
   }
 
   render () {
-    const { workouts, limit, totalRows } = this.state
+    const { workouts, limit, count } = this.state
 
     return (
       <Layout
@@ -77,7 +61,7 @@ class Workouts extends Component {
             </div>
           </div>
           <WorkoutsList workouts={workouts} />
-          {limit < totalRows && (
+          {limit < count && (
             <div className='buttons is-centered'>
               <a className='button is-light is-small' onClick={this.loadMore}>Load more</a>
             </div>

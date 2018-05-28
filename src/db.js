@@ -5,18 +5,19 @@ import PouchDBUpsert from 'pouchdb-upsert'
 PouchDB.plugin(PouchDBUpsert)
 PouchDB.plugin(PouchDBFind)
 
-const localDB = new PouchDB('local')
+export const db = new PouchDB('local')
 
 sync()
 
 export function store () {
-  return localDB
+  return db
 }
 
 export function sync () {
-  const couchDB = localStorage.getItem('couchDB')
-  if (couchDB) {
-    const remoteDB = new PouchDB(couchDB)
-    localDB.sync(remoteDB, { live: true, retry: true })
+  const couchUrl = localStorage.getItem('couchDB')
+
+  if (couchUrl !== null) {
+    const couch = new PouchDB(couchUrl)
+    db.sync(couch, { live: true, retry: true })
   }
 }
