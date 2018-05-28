@@ -22,7 +22,6 @@ class Hero extends Component {
             <div className='container'>
               <div className='navbar-brand'>
                 <Link className='navbar-item' to='/'>One More Rep</Link>
-                <Link className='navbar-item' to='/stats'><strong>Stats</strong></Link>
                 <span className='navbar-burger burger' onClick={this.toggleMenu}>
                   <span></span>
                   <span></span>
