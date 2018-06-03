@@ -1,10 +1,10 @@
 import moment from 'moment'
 import { object } from 'prop-types'
 import React, { Component } from 'react'
-import * as workouts from '../repositories/workouts'
-import ExercisesList from './ExercisesList'
-import Input from './Input'
-import Layout from './Layout'
+import * as workouts from '../../repositories/workouts'
+import ExercisesList from '../ExercisesList'
+import Input from '../Input'
+import Layout from '../Layout'
 
 class Workout extends Component {
   state = {

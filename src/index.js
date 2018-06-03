@@ -3,9 +3,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { handleCallback } from './auth'
-import Stats from './components/Stats'
-import Workout from './components/Workout'
-import Workouts from './components/Workouts'
+import Exercises from './components/pages/Exercises'
+import Workout from './components/pages/Workout'
+import Workouts from './components/pages/Workouts'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 
@@ -14,7 +14,7 @@ ReactDOM.render(
     <div>
       <Route exact path="/" component={Workouts} />
       <Route path="/workout/:id" component={Workout} />
-      <Route path="/stats" component={Stats} />
+      <Route path="/exercises" component={Exercises} />
       <Route
         path="/callback"
         render={props => {
