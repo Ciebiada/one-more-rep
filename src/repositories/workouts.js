@@ -46,11 +46,15 @@ export const updateWorkout = workout => props => {
   return db.upsert(workout._id, doc => ({...doc, ...props}))
 }
 
-export const clone = async workout => {
+export const clone = workout => {
   const now = new Date().toJSON()
 
   return db.put({
     ...workout,
+    exercises: workout.exercises.map(exercise => ({
+      ...exercise,
+      workSets: exercise.workSets.map(workSet => ({...workSet, reps: null}))
+    })),
     _rev: null,
     _id: now,
     date: now

@@ -3,6 +3,11 @@ import Layout from '../Layout'
 import * as exercises from '../../repositories/exercises'
 import List from '../List'
 
+const repsToString = reps =>
+  reps === 1
+    ? `1 time`
+    : `${reps} times`
+
 class Exercises extends Component {
   state = {
     exercises: []
@@ -30,7 +35,7 @@ class Exercises extends Component {
             elements={exercises}
             columns={[
               {name: 'Name', value: exercise => exercise.key},
-              {name: 'Sessions', value: exercise => `#${exercise.value}`}
+              {name: 'Sessions', value: exercise => repsToString(exercise.value)}
             ]}
             keyFunc={exercise => exercise.key}
             placeholder='You have no exercises yet. Start training!'

@@ -16,18 +16,16 @@ const List = ({elements, link, columns, placeholder, keyFunc}) => {
     </div>
   )
 
-  return (
-    elements.length
-      ? (
-        <div className='List'>
-          {elements.map(element => link
-            ? <Link key={keyFunc(element)} to={link(element)}>{row(element)}</Link>
-            : row(element)
-          )}
-        </div>
-      )
-      : <div className='notification'>{placeholder}</div>
-  )
+  return elements.length
+    ? (
+      <div className='List'>
+        {elements.map(element => link
+          ? <Link key={keyFunc(element)} to={link(element)}>{row(element)}</Link>
+          : row(element)
+        )}
+      </div>
+    )
+    : <div className='notification'>{placeholder}</div>
 }
 
 List.propTypes = {
