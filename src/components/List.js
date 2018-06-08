@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './List.css'
 
-const List = ({ elements, link, columns, placeholder, keyFunc }) => {
+const List = ({elements, link, columns, placeholder, keyFunc}) => {
   const row = element => (
     <div key={keyFunc(element)} className='List-row'>
       <div className='columns has-text-centered'>

@@ -23,7 +23,7 @@ export function isAuthenticated () {
   return couchDB !== null
 }
 
-export function handleCallback ({ history, location }) {
+export function handleCallback ({history, location}) {
   if (/access_token|id_token|error/.test(location.hash)) {
     auth0.parseHash((_, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {

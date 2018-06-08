@@ -1,31 +1,32 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 .top-bar {
-  margin-bottom: 3rem;
+    margin-bottom: 3rem;
 }
 
 .clear-input {
-  width: 100%;
-  padding: unset;
-  font: unset;
-  background: unset;
-  color: unset;
-  border: unset;
-  outline: unset;
+    width: 100%;
+    padding: unset;
+    font: unset;
+    background: unset;
+    color: unset;
+    border: unset;
+    outline: unset;
 }
 
 /* hack to fix inconsitent height of input datetime-local */
 .hero.is-primary .title {
-  height: 36px;
+    height: 36px;
 }
-.hero.is-primary .subtitle{
-  height: 25px;
+
+.hero.is-primary .subtitle {
+    height: 25px;
 }
 
 ::placeholder {
-  opacity: 0.5;
+    opacity: 0.5;
 }

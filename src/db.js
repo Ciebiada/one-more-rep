@@ -18,6 +18,6 @@ export function sync () {
 
   if (couchUrl !== null) {
     const couch = new PouchDB(couchUrl)
-    db.sync(couch, { live: true, retry: true })
+    db.sync(couch, {live: true, retry: true})
   }
 }

@@ -18,7 +18,7 @@ class Exercises extends Component {
   }
 
   render () {
-    const { exercises } = this.state
+    const {exercises} = this.state
 
     return (
       <Layout

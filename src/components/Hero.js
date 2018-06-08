@@ -9,11 +9,11 @@ class Hero extends Component {
     menuOpened: false
   }
 
-  toggleMenu = () => this.setState({ menuOpened: !this.state.menuOpened })
+  toggleMenu = () => this.setState({menuOpened: !this.state.menuOpened})
 
   render () {
-    const { title, subtitle, meta } = this.props
-    const { menuOpened } = this.state
+    const {title, subtitle, meta} = this.props
+    const {menuOpened} = this.state
 
     return (
       <section className='hero is-primary'>
@@ -29,7 +29,7 @@ class Hero extends Component {
                   <span></span>
                 </span>
               </div>
-              <div className={classNames('navbar-menu', { 'is-active': menuOpened })}>
+              <div className={classNames('navbar-menu', {'is-active': menuOpened})}>
                 <div className='navbar-end'>
                   {isAuthenticated()
                     ? <Link to='/' className='navbar-item' onClick={logout}>Sign out</Link>

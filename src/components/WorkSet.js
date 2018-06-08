@@ -2,7 +2,7 @@ import { func, object } from 'prop-types'
 import React from 'react'
 import Input from './Input'
 
-const WorkSet = ({ workSet, onUpdate }) => (
+const WorkSet = ({workSet, onUpdate}) => (
   <div className='row'>
     <div className='columns is-mobile'>
       <div className='column'>
@@ -12,7 +12,7 @@ const WorkSet = ({ workSet, onUpdate }) => (
           placeholder='Weight'
           value={workSet.weight}
           step='0.125'
-          onChange={weight => onUpdate({ weight })}
+          onChange={weight => onUpdate({weight})}
         />
       </div>
       <div className='column'>
@@ -22,7 +22,7 @@ const WorkSet = ({ workSet, onUpdate }) => (
           placeholder='Reps'
           value={workSet.reps}
           step='0.125'
-          onChange={reps => onUpdate({ reps })}
+          onChange={reps => onUpdate({reps})}
         />
       </div>
     </div>

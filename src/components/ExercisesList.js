@@ -4,7 +4,7 @@ import './ExercisesList.css'
 import WorkSet from './WorkSet'
 import Input from './Input'
 
-const ExercisesList = ({ exercises, onExerciseDelete, onExerciseUpdate, updateWorkSet }) => (
+const ExercisesList = ({exercises, onExerciseDelete, onExerciseUpdate, updateWorkSet}) => (
   exercises && exercises.length
     ? (
       <div className='ExercisesList'>
@@ -17,10 +17,10 @@ const ExercisesList = ({ exercises, onExerciseDelete, onExerciseUpdate, updateWo
                 type='text'
                 placeholder='Exercise name'
                 value={exercise.name}
-                onChange={name => onExerciseUpdate(exercise._id)({ name })}
+                onChange={name => onExerciseUpdate(exercise._id)({name})}
               />
             </h4>
-            <button className='delete' onClick={onExerciseDelete(exercise._id)} />
+            <button className='delete' onClick={onExerciseDelete(exercise._id)}/>
             {exercise.workSets && exercise.workSets.map(workSet => (
               <WorkSet
                 key={workSet._id}

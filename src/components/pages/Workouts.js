@@ -22,7 +22,7 @@ class Workouts extends Component {
   }
 
   getWorkouts = () => {
-    const { limit } = this.state
+    const {limit} = this.state
 
     workouts.findAll({limit}).then(({workouts, count}) => {
       this.setState({workouts, count})
@@ -30,7 +30,7 @@ class Workouts extends Component {
   }
 
   addWorkout = () => {
-    const { history } = this.props
+    const {history} = this.props
 
     workouts.create().then(({id}) => {
       history.push(`/workout/${id}`)
@@ -42,12 +42,12 @@ class Workouts extends Component {
   }
 
   loadMore = () => {
-    const { limit } = this.state
-    this.setState({ limit: Math.round(limit * 3 / 2) }, this.getWorkouts)
+    const {limit} = this.state
+    this.setState({limit: Math.round(limit * 3 / 2)}, this.getWorkouts)
   }
 
   render () {
-    const { workouts, limit, count } = this.state
+    const {workouts, limit, count} = this.state
 
     return (
       <Layout
@@ -60,7 +60,7 @@ class Workouts extends Component {
               <a className='button is-primary' onClick={this.addWorkout}>Add Workout</a>
             </div>
           </div>
-          <WorkoutsList workouts={workouts} />
+          <WorkoutsList workouts={workouts}/>
           {limit < count && (
             <div className='buttons is-centered'>
               <a className='button is-light is-small' onClick={this.loadMore}>Load more</a>

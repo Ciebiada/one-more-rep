@@ -24,12 +24,12 @@ class Workout extends Component {
   }
 
   getWorkout = id => {
-    workouts.find(id).then(workout => this.setState({ workout }))
+    workouts.find(id).then(workout => this.setState({workout}))
   }
 
   deleteWorkout = () => {
-    const { history } = this.props
-    const { workout } = this.state
+    const {history} = this.props
+    const {workout} = this.state
 
     workouts.remove(workout).then(() => {
       history.push('/')
@@ -37,8 +37,8 @@ class Workout extends Component {
   }
 
   cloneWorkout = () => {
-    const { history } = this.props
-    const { workout } = this.state
+    const {history} = this.props
+    const {workout} = this.state
 
     workouts.clone(workout).then(created => history.push('/'))
   }
@@ -56,13 +56,13 @@ class Workout extends Component {
   }
 
   onNameChange = name => {
-    workouts.updateWorkout(this.state.workout)({ name })
+    workouts.updateWorkout(this.state.workout)({name})
   }
 
   onDateChange = dateString => {
     const date = moment(dateString).toDate()
 
-    workouts.updateWorkout(this.state.workout)({ date })
+    workouts.updateWorkout(this.state.workout)({date})
   }
 
   addWorkSet = exerciseId => () => {
@@ -78,7 +78,7 @@ class Workout extends Component {
   }
 
   render () {
-    const { workout } = this.state
+    const {workout} = this.state
 
     if (!workout) return null
 

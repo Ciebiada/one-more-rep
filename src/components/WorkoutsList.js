@@ -3,7 +3,7 @@ import { arrayOf, object } from 'prop-types'
 import React from 'react'
 import List from './List'
 
-const WorkoutsList = ({ workouts }) => (
+const WorkoutsList = ({workouts}) => (
   <List
     elements={workouts}
     columns={[

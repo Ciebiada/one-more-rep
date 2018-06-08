@@ -12,7 +12,7 @@ class Input extends React.Component {
   updateValue = evt => {
     const value = evt.target.value
     this.props.onChange(value)
-    this.setState({ value })
+    this.setState({value})
   }
 
   componentWillReceiveProps (props) {
@@ -31,7 +31,7 @@ class Input extends React.Component {
 
   render () {
     const props = this.props
-    const { value } = this.state
+    const {value} = this.state
 
     return (
       <input

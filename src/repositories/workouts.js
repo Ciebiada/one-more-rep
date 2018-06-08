@@ -4,7 +4,7 @@ import { db } from '../db'
 const updateInList = (id, update, list) =>
   addIndex(map)(
     (element, idx) => element._id === id
-      ? { ...element, ...update(element, idx === list.length - 1) }
+      ? {...element, ...update(element, idx === list.length - 1)}
       : element,
     list
   )
@@ -23,19 +23,19 @@ export const remove = workout => {
   return db.remove(workout)
 }
 
-export const findAll = async ({ limit }) => {
-  await db.createIndex({ index: { fields: ['date'] } })
+export const findAll = async ({limit}) => {
+  await db.createIndex({index: {fields: ['date']}})
 
-  const { total_rows: totalRows } = await db.allDocs()
+  const {total_rows: totalRows} = await db.allDocs()
   const count = totalRows - 1
 
-  const { docs: workouts } = await db.find({
+  const {docs: workouts} = await db.find({
     limit,
-    selector: { date: { $gte: null } },
-    sort: [{ date: 'desc' }]
+    selector: {date: {$gte: null}},
+    sort: [{date: 'desc'}]
   })
 
-  return { workouts, count }
+  return {workouts, count}
 }
 
 export const find = id => {
@@ -43,7 +43,7 @@ export const find = id => {
 }
 
 export const updateWorkout = workout => props => {
-  return db.upsert(workout._id, doc => ({ ...doc, ...props }))
+  return db.upsert(workout._id, doc => ({...doc, ...props}))
 }
 
 export const clone = async workout => {
@@ -99,18 +99,18 @@ export const addExercise = workout => {
   }
 
   return db
-    .upsert(workout._id, doc => ({ ...doc, exercises: [...(workout.exercises || []), exercise] }))
+    .upsert(workout._id, doc => ({...doc, exercises: [...(workout.exercises || []), exercise]}))
     .then(() => addWorkSet(workout)(exercise._id))
 }
 
 export const removeExercise = workout => id => {
-  return db.upsert(workout._id, doc => ({ ...doc, exercises: reject(({ _id }) => _id === id, workout.exercises) }))
+  return db.upsert(workout._id, doc => ({...doc, exercises: reject(({_id}) => _id === id, workout.exercises)}))
 }
 
 export const updateExercise = workout => id => props => {
   return db.upsert(workout._id, doc => ({
     ...doc,
-    exercises: map(exercise => exercise._id === id ? { ...exercise, ...props } : exercise, workout.exercises)
+    exercises: map(exercise => exercise._id === id ? {...exercise, ...props} : exercise, workout.exercises)
   }))
 }
 

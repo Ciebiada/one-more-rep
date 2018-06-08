@@ -8,6 +8,6 @@ export const findAll = async () => {
         forEach(exercise => emit(exercise.name), doc.exercises)
       },
       reduce: '_count'
-    }, { reduce: true, group: true })
+    }, {reduce: true, group: true})
     .then(({rows}) => sort(descend(prop('value')), rows))
 }

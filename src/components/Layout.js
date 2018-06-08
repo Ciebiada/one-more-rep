@@ -2,7 +2,7 @@ import { node } from 'prop-types'
 import React from 'react'
 import Hero from './Hero'
 
-const Layout = ({ title, subtitle, meta, children }) => (
+const Layout = ({title, subtitle, meta, children}) => (
   <div>
     <Hero
       title={title}
@@ -18,7 +18,8 @@ const Layout = ({ title, subtitle, meta, children }) => (
       <div className="container">
         <div className="content has-text-centered">
           <p>
-            <strong>Enjoy.</strong> Issues and ideas go <a href="https://github.com/ciebiada/one-more-rep/issues">here</a>
+            <strong>Enjoy.</strong> Issues and ideas go <a
+            href="https://github.com/ciebiada/one-more-rep/issues">here</a>
           </p>
         </div>
       </div>
