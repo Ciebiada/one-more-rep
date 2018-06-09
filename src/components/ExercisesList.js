@@ -1,8 +1,8 @@
 import { arrayOf, func, object } from 'prop-types'
 import React from 'react'
 import './ExercisesList.css'
-import WorkSet from './WorkSet'
 import Input from './Input'
+import WorkSet from './WorkSet'
 
 const ExercisesList = ({exercises, onExerciseDelete, onExerciseUpdate, updateWorkSet}) => (
   exercises && exercises.length

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Layout from '../Layout'
 import * as exercises from '../../repositories/exercises'
+import Layout from '../Layout'
 import List from '../List'
 
 const repsToString = reps =>
@@ -39,6 +39,7 @@ class Exercises extends Component {
             ]}
             keyFunc={exercise => exercise.key}
             placeholder='You have no exercises yet. Start training!'
+            link={exercise => `exercises/${exercise.key}`}
           />
         </div>
       </Layout>

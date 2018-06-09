@@ -10,7 +10,7 @@ const WorkoutsList = ({workouts}) => (
       {name: 'Name', value: workout => workout.name},
       {name: 'When', value: workout => moment(workout.date).fromNow()}
     ]}
-    link={workout => `workout/${workout._id}`}
+    link={workout => `workouts/${workout._id}`}
     keyFunc={workout => workout._id}
     placeholder='You have no workouts. Create one!'
   />

@@ -1,8 +1,8 @@
 import { object } from 'prop-types'
 import React, { Component } from 'react'
+import * as workouts from '../../repositories/workouts'
 import Layout from '../Layout'
 import WorkoutsList from '../WorkoutsList'
-import * as workouts from '../../repositories/workouts'
 
 class Workouts extends Component {
   state = {
