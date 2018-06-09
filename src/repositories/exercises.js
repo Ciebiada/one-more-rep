@@ -17,10 +17,13 @@ export const find = name => db
         if (exercise.name === name) {
           const maxWeight = pipe(
             map(prop('weight')),
+            map(parseFloat),
             reduce(max, -Infinity)
-          )
+          )(exercise.workSets)
 
-          emit(doc.date, maxWeight(exercise.workSets))
+          if (maxWeight > -Infinity) {
+            emit(doc.date, maxWeight)
+          }
         }
       }, doc.exercises)
     }
