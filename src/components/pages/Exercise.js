@@ -17,9 +17,6 @@ class Exercise extends Component {
     const weights = await exercises.find(name)
 
     const graphOption = {
-      title: {
-        text: 'Max weight by date'
-      },
       tooltip: {},
       legend: {
         data: ['Max weight']
@@ -51,7 +48,6 @@ class Exercise extends Component {
         subtitle='Eat, sleep, train, repeat 🏋️'
       >
         {graphOption && <ReactEcharts option={graphOption}/>}
-        }
       </Layout>
     )
   }
