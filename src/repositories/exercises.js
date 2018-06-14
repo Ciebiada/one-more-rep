@@ -1,4 +1,4 @@
-import { descend, forEach, map, max, pipe, prop, reduce, sort } from 'ramda'
+import { any, descend, forEach, prop, has, sort } from 'ramda'
 import { db } from '../db'
 
 export const findAll = () => db
@@ -14,16 +14,8 @@ export const find = name => db
   .query({
     map (doc, emit) {
       forEach(exercise => {
-        if (exercise.name === name) {
-          const maxWeight = pipe(
-            map(prop('weight')),
-            map(parseFloat),
-            reduce(max, -Infinity)
-          )(exercise.workSets)
-
-          if (maxWeight > -Infinity) {
-            emit(doc.date, maxWeight)
-          }
+        if (exercise.name === name && any(has('weight'), exercise.workSets)) {
+          emit(doc.date, exercise)
         }
       }, doc.exercises)
     }
