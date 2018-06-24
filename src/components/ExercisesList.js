@@ -4,7 +4,7 @@ import './ExercisesList.css'
 import Input from './Input'
 import WorkSet from './WorkSet'
 
-const ExercisesList = ({exercises, onExerciseDelete, onExerciseUpdate, updateWorkSet}) => (
+const ExercisesList = ({exercises, onExerciseDelete, onExerciseUpdate, updateWorkSet, deleteWorkSet}) => (
   exercises && exercises.length
     ? (
       <div className='ExercisesList'>
@@ -26,6 +26,9 @@ const ExercisesList = ({exercises, onExerciseDelete, onExerciseUpdate, updateWor
                 key={workSet._id}
                 workSet={workSet}
                 onUpdate={updateWorkSet(exercise._id)(workSet._id)}
+                onBlur={({weight, reps, _id}) => {
+                  if (!weight && !reps) deleteWorkSet(exercise._id)(_id)
+                }}
               />
             ))}
           </div>
@@ -39,7 +42,8 @@ ExercisesList.propTypes = {
   exercises: arrayOf(object),
   onExerciseDelete: func.isRequired,
   onExerciseUpdate: func.isRequired,
-  updateWorkSet: func.isRequired
+  updateWorkSet: func.isRequired,
+  deleteWorkSet: func.isRequired
 }
 
 export default ExercisesList

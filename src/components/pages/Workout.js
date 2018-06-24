@@ -140,6 +140,7 @@ class Workout extends Component {
             onExerciseDelete={this.deleteExercise}
             onExerciseUpdate={this.updateExercise}
             updateWorkSet={this.updateWorkSet}
+            deleteWorkSet={this.deleteWorkSet}
           />
         </div>
       </Layout>

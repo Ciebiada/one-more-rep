@@ -25,7 +25,11 @@ class Input extends React.Component {
     this.setState({focused: true})
   }
 
-  onBlur = () => {
+  onBlur = evt => {
+    const value = evt.target.value
+
+    if (this.props.onBlur) this.props.onBlur(value)
+
     this.setState({focused: false})
   }
 
@@ -47,6 +51,7 @@ class Input extends React.Component {
 
 Input.propTypes = {
   onChange: func.isRequired,
+  onBlur: func,
   value: string,
   autoFocus: bool
 }

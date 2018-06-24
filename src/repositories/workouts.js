@@ -87,9 +87,6 @@ export const updateWorkSet = workout => exerciseId => id => props => {
     exercises: updateInList(exerciseId, exercise => ({
       workSets: updateInList(id, (workSet, last) => {
         if (last) addWorkSet(workout)(exerciseId)
-        const merged = {...workSet, ...props}
-        if (!merged.reps && !merged.weight) removeWorkSet(workout)(exerciseId)(id)
-
         return props
       }, exercise.workSets)
     }), doc.exercises)

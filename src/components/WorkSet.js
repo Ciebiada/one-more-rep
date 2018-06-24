@@ -2,7 +2,7 @@ import { func, object } from 'prop-types'
 import React from 'react'
 import Input from './Input'
 
-const WorkSet = ({workSet, onUpdate}) => (
+const WorkSet = ({workSet, onUpdate, onBlur}) => (
   <div className='row'>
     <div className='columns is-mobile'>
       <div className='column'>
@@ -13,6 +13,7 @@ const WorkSet = ({workSet, onUpdate}) => (
           value={workSet.weight}
           step='0.125'
           onChange={weight => onUpdate({weight})}
+          onBlur={() => onBlur(workSet)}
         />
       </div>
       <div className='column'>
@@ -23,6 +24,7 @@ const WorkSet = ({workSet, onUpdate}) => (
           value={workSet.reps}
           step='0.125'
           onChange={reps => onUpdate({reps})}
+          onBlur={() => onBlur(workSet)}
         />
       </div>
     </div>
@@ -31,6 +33,7 @@ const WorkSet = ({workSet, onUpdate}) => (
 
 WorkSet.propTypes = {
   workSet: object.isRequired,
+  onBlur: func.isRequired,
   onUpdate: func.isRequired
 }
 
