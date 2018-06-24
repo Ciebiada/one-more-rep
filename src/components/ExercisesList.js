@@ -21,13 +21,14 @@ const ExercisesList = ({exercises, onExerciseDelete, onExerciseUpdate, updateWor
               />
             </h4>
             <button className='delete' onClick={onExerciseDelete(exercise._id)}/>
-            {exercise.workSets && exercise.workSets.map(workSet => (
+            {exercise.workSets && exercise.workSets.map((workSet, idx) => (
               <WorkSet
                 key={workSet._id}
                 workSet={workSet}
                 onUpdate={updateWorkSet(exercise._id)(workSet._id)}
                 onBlur={({weight, reps, _id}) => {
-                  if (!weight && !reps) deleteWorkSet(exercise._id)(_id)
+                  const last = idx === exercise.workSets.length - 1
+                  if (!weight && !reps && !last) deleteWorkSet(exercise._id)(_id)
                 }}
               />
             ))}
