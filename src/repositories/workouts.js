@@ -52,8 +52,7 @@ export const clone = workout => {
   return db.put({
     ...workout,
     exercises: workout.exercises.map(exercise => ({
-      ...exercise,
-      workSets: exercise.workSets.map(workSet => ({...workSet, reps: null}))
+      ...exercise
     })),
     _rev: null,
     _id: now,
