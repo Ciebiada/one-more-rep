@@ -78,6 +78,7 @@ class Workout extends Component {
   }
 
   render () {
+    const {history} = this.props
     const {workout} = this.state
 
     if (!workout) return null
@@ -128,6 +129,7 @@ class Workout extends Component {
         title={title}
         subtitle={subtitle}
         meta={meta}
+        history={history}
       >
         <div>
           <div className='top-bar'>

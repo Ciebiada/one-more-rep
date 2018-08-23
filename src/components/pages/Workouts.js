@@ -47,12 +47,14 @@ class Workouts extends Component {
   }
 
   render () {
+    const {history} = this.props
     const {workouts, limit, count} = this.state
 
     return (
       <Layout
         title='Workouts'
         subtitle='Eat, sleep, train, repeat 🏋️'
+        history={history}
       >
         <div>
           <div className='top-bar'>

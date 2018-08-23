@@ -75,13 +75,14 @@ class Exercise extends Component {
   }
 
   render () {
-    const {match: {params: {name}}} = this.props
+    const {match: {params: {name}}, history} = this.props
     const {maxWeightGraph, volumeGraph} = this.state
 
     return (
       <Layout
         title={name}
         subtitle='Eat, sleep, train, repeat 🏋️'
+        history={history}
       >
         {maxWeightGraph && <ReactEcharts option={maxWeightGraph}/>}
         {volumeGraph && <ReactEcharts option={volumeGraph}/>}
@@ -91,7 +92,8 @@ class Exercise extends Component {
 }
 
 Exercise.propTypes = {
-  match: object.isRequired
+  match: object.isRequired,
+  history: object.isRequired
 }
 
 export default Exercise

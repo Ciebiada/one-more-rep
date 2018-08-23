@@ -1,3 +1,4 @@
+import { object } from 'prop-types'
 import React, { Component } from 'react'
 import * as exercises from '../../repositories/exercises'
 import Layout from '../Layout'
@@ -23,12 +24,14 @@ class Exercises extends Component {
   }
 
   render () {
+    const {history} = this.props
     const {exercises} = this.state
 
     return (
       <Layout
         title='Exercises'
         subtitle='Eat, sleep, train, repeat 🏋️'
+        history={history}
       >
         <div>
           <List
@@ -45,6 +48,10 @@ class Exercises extends Component {
       </Layout>
     )
   }
+}
+
+Exercises.propTypes = {
+  history: object.isRequired
 }
 
 export default Exercises

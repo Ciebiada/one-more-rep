@@ -1,41 +1,32 @@
-import Auth0 from 'auth0-js'
-import { sync } from './db'
+import Auth0Lock from 'auth0-lock'
 
-const auth0 = new Auth0.WebAuth({
-  domain: 'one-more-rep.auth0.com',
-  clientID: 'KP7MSlvT8TNjPygVA7AvUCkRFxgt3EUj',
-  redirectUri: 'https://ciebiada.github.io/one-more-rep/callback',
-  audience: 'https://one-more-rep.auth0.com/userinfo',
-  responseType: 'token id_token',
-  scope: 'openid'
-})
-
-export function login () {
-  auth0.authorize()
-}
-
-export function logout () {
-  localStorage.removeItem('couchDB')
-}
-
-export function isAuthenticated () {
-  const couchDB = localStorage.getItem('couchDB')
-  return couchDB !== null
-}
-
-export function handleCallback ({history, location}) {
-  if (/access_token|id_token|error/.test(location.hash)) {
-    auth0.parseHash((_, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        setSession(authResult)
-        sync()
-      }
-
-      history.replace('/')
-    })
+const clientId = 'KP7MSlvT8TNjPygVA7AvUCkRFxgt3EUj'
+const domain = 'one-more-rep.auth0.com'
+const options = {
+  autoclose: true,
+  auth: {
+    redirect: false,
   }
 }
 
-function setSession (authResult) {
-  localStorage.setItem('couchDB', authResult.idTokenPayload['https://ciebiada.com/couchDB'])
+const lock = new Auth0Lock(clientId, domain, options)
+
+export const login = history => () => {
+  lock.on('authenticated', ({accessToken}) => {
+    lock.getUserInfo(accessToken, (error, profile) => {
+      localStorage.setItem('couchDB', profile['https://ciebiada.com/couchDB'])
+      history.replace('/')
+    })
+  })
+
+  lock.show()
+}
+
+export const logout = () => {
+  localStorage.removeItem('couchDB')
+}
+
+export const isAuthenticated = () => {
+  const couchDB = localStorage.getItem('couchDB')
+  return couchDB !== null
 }

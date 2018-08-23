@@ -2,7 +2,6 @@ import 'bulma/css/bulma.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
-import { handleCallback } from './auth'
 import Exercise from './components/pages/Exercise'
 import Exercises from './components/pages/Exercises'
 import Workout from './components/pages/Workout'
@@ -17,13 +16,6 @@ ReactDOM.render(
       <Route path="/workouts/:id" component={Workout}/>
       <Route exact path="/exercises" component={Exercises}/>
       <Route path="/exercises/:name" component={Exercise}/>
-      <Route
-        path="/callback"
-        render={props => {
-          handleCallback(props)
-          return null
-        }}
-      />
     </div>
   </BrowserRouter>,
   document.getElementById('root')

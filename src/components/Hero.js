@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { node } from 'prop-types'
+import { node, object } from 'prop-types'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { isAuthenticated, login, logout } from '../auth'
@@ -12,7 +12,7 @@ class Hero extends Component {
   toggleMenu = () => this.setState({menuOpened: !this.state.menuOpened})
 
   render () {
-    const {title, subtitle, meta} = this.props
+    const {title, subtitle, meta, history} = this.props
     const {menuOpened} = this.state
 
     return (
@@ -33,7 +33,7 @@ class Hero extends Component {
                 <div className='navbar-end'>
                   {isAuthenticated()
                     ? <Link to='/' className='navbar-item' onClick={logout}>Sign out</Link>
-                    : <a className='navbar-item' onClick={login}>Sign in</a>}
+                    : <a className='navbar-item' onClick={login(history)}>Sign in</a>}
                 </div>
               </div>
             </div>
@@ -58,7 +58,8 @@ class Hero extends Component {
 Hero.propTypes = {
   title: node,
   subtitle: node,
-  meta: node
+  meta: node,
+  history: object.isRequired
 }
 
 export default Hero
