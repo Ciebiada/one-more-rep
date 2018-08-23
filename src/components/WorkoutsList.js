@@ -7,7 +7,7 @@ const WorkoutsList = ({workouts}) => (
   <List
     elements={workouts}
     columns={[
-      {name: 'Name', value: workout => workout.name},
+      {name: 'Name', value: workout => workout.name || 'Unnamed'},
       {name: 'When', value: workout => moment(workout.date).fromNow()}
     ]}
     link={workout => `workouts/${workout._id}`}

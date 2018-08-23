@@ -33,7 +33,7 @@ class Workouts extends Component {
     const {history} = this.props
 
     workouts.create().then(({id}) => {
-      history.push(`/workout/${id}`)
+      history.push(`/workouts/${id}`)
     })
   }
 
